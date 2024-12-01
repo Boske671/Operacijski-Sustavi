@@ -1,0 +1,5 @@
+make
+sudo insmod 3.ko
+dmesg
+sudo rmmod 3.ko
+dmesg 
