@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
     {
         int* korisnikID = malloc(sizeof(int));
         *korisnikID = i + 1;
-        if (pthread_create(&dretve[i], NULL, korisnikCheckIn, korisnikID) != 0) 
+        if (pthread_create(&dretve[i], NULL, korisnikCheckIn, korisnikID) != 0) //nit, atribut, funckija, parametar za funkciju
         {
             perror("Greška pri stvaranju dretve");
             return 1;
@@ -77,11 +77,28 @@ int main(int argc, char* argv[])
     {
         pthread_join(dretve[i], NULL);
     }
-
+    
+    int brojac = 0;
+    int polje2[100];
     for (int i = 0; i < brThreads; i++)
     {
         printf("%d. Sjedalo: %d \n", i + 1, polje[i]);
+        if(polje[i] == 0)
+		{
+		polje[brojac] = (i + 1);
+		brojac++;
+		}
     }
+
+
+	printf("Broj ne zauzetih mjesta: %d\n", brojac);
+	printf("Ne zauzeta mjesta: ");
+	for(int i = 0; i < brojac; i++)
+	{
+	printf("%d ", polje2[i]);
+	}
+	printf("\n");
+
 
     return 0;
 }
